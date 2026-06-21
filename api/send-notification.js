@@ -137,6 +137,21 @@ function buildEmailContent(tableName, record) {
         `,
       };
 
+    case 'vidyana_job_applications':
+      return {
+        subject: `🧑‍💻 New Vidyana team application — ${record.full_name}`,
+        htmlBody: `
+          <h2>New Application — Careers at Vidyana</h2>
+          <p><strong>Name:</strong> ${escapeHtml(record.full_name)}</p>
+          <p><strong>Phone:</strong> ${escapeHtml(record.phone)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(record.email)}</p>
+          <p><strong>College:</strong> ${escapeHtml(record.college)}</p>
+          <p><strong>Year of study:</strong> ${escapeHtml(record.year_of_study)}</p>
+          ${record.why_fit ? `<p><strong>Why a good fit:</strong> ${escapeHtml(record.why_fit)}</p>` : ''}
+          <p style="color:#888;font-size:13px;">Submitted: ${new Date(record.created_at).toLocaleString('en-IN')}</p>
+        `,
+      };
+
     default:
       return { subject: null, htmlBody: null };
   }
